@@ -1,82 +1,65 @@
 package ru.netology;
 
 public class Radio {
+    private int fmAmount = 10;
+    private int lastFm = getFmAmount();
+    private int firstFm;
     private int currentFm;
+    private int minVolume;
+    private int maxVolume = 100;
     private int currentVolume;
 
 
-    public int getFirstFm() {
-        return 0;
+    public Radio() {
     }
 
-    public int getLastFm() {
-        return 9;
+    public Radio(int fmAmount) {
+
+        this.fmAmount = fmAmount;
     }
 
-    public int getCurrentFm() {
-        return currentFm;
-    }
-
-    public void setCurrentFm(int CurrentFm) {
-        if (CurrentFm < 0) {
+    public void setCurrentFm(int currentFm) {
+        if (currentFm < 0) {
             return;
         }
-        if (CurrentFm > getLastFm()) {
+        if (currentFm > getLastFm()) {
             return;
         }
-        this.currentFm = CurrentFm;
+        this.currentFm = currentFm;
     }
 
     public void stepForward() {
         int newFm = currentFm + 1;
         setCurrentFm(newFm);
-        if (newFm > 9) {
-            newFm = getFirstFm();
-        }
         this.currentFm = newFm;
     }
 
     public void stepBackward() {
         int newFm = currentFm - 1;
         setCurrentFm(newFm);
-        if (newFm < 0) {
-            newFm = getLastFm();
+        if (newFm < getFirstFm()) {
+            newFm = getFirstFm();
         }
         this.currentFm = newFm;
+
     }
 
-
-
-
-
-    public int getMinVolume() {
-        return 0;
-    }
-
-    public int getMaxVolume() {
-        return 10;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int CurrentVolume) {
-        if (CurrentVolume < 0) {
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < getMinVolume()) {
             return;
         }
-        if (CurrentVolume > getMaxVolume()) {
+        if (currentVolume > getMaxVolume()) {
             return;
         }
-        this.currentVolume = CurrentVolume;
+        this.currentVolume = currentVolume;
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < 100) {
             currentVolume = currentVolume + 1;
         }
-
     }
+
 
     public void decreaseVolume() {
         if (currentVolume > 0) {
@@ -84,8 +67,35 @@ public class Radio {
         } else {
             currentVolume = getMinVolume();
         }
+    }
 
+    public int getFmAmount() {
+        return fmAmount - 1;
     }
 
 
+
+    public int getFirstFm() {
+        return firstFm;
+    }
+
+    public int getLastFm() {
+        return getFmAmount();
+    }
+
+    public int getCurrentFm() {
+        return currentFm;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
 }
